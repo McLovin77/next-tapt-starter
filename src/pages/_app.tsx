@@ -3,12 +3,15 @@ import type { AppProps } from "next/app";
 import { withTRPC } from "@trpc/next";
 import { AppRouter } from "./api/trpc/[trpc]";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { SessionProvider } from "next-auth/react";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <>
-      <Component {...pageProps} />
-      <ReactQueryDevtools />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+        <ReactQueryDevtools />
+      </SessionProvider>
     </>
   );
 }

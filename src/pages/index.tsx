@@ -1,12 +1,13 @@
 import Button from "@/components/Button";
 import { trpc } from "@/lib/trpc";
 import type { NextPage } from "next";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
-  const getUserQuery = trpc.useQuery(['users.getCurrent'])
+  const { data: session } = useSession();
 
   return (
     <div className={styles.container}>
@@ -17,12 +18,17 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
+        <h1 style={{marginBottom: 24}} className={styles.title}>
           Welcome to TAPT starter! <br />(<b>TRPC</b>, Next <b>Auth</b>,{" "}
           <b>Prisma</b> & <b>Tailwind</b>)
         </h1>
-        <pre>{JSON.stringify(getUserQuery.data)}</pre>
-        <Button>Button example with absolute import</Button>
+        {session && (
+          <>
+          <h4>Signed in as:</h4>
+          <pre>{JSON.stringify(session,null,2)}</pre>
+          </>
+        )}
+        {session ? <Button onClick={signOut}>Sign out</Button> : <Button onClick={signIn}>Sign in</Button>}
       </main>
 
       <footer className={styles.footer}>
