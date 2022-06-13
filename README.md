@@ -3,10 +3,10 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Roadmap
-- [] Add prisma
-- [] Add users models to the db
-- [] Add tailwindcss
-- [] Add planetscale / mongodb examples
+- [ ] Add prisma
+- [ ] Add users models to the db
+- [ ] Add tailwindcss
+- [ ] Add planetscale / mongodb examples
 
 ## Getting Started
 First, run the development server:
